@@ -5,6 +5,7 @@ const port = 3000
 
 //Importa Rotas
 const rotaProduto = require('./rotas/produto_rota');
+const rotaUsuario = require('./rotas/usuario_rota');
 
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
@@ -32,7 +33,9 @@ app.use((req,resp,next) => {
 
 //Uso das rotas
 app.use('/api/produtos', rotaProduto);
-  
+
+app.use('/api/usuarios', rotaUsuario);
+
 app.listen(port, () => {
   console.log(`Iniciando o servidor: http://localhost:${port}`)
 })

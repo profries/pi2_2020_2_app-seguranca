@@ -1,7 +1,7 @@
 {
-  "name": "crud_produtos",
+  "name": "crud_usuarios",
   "version": "1.0.0",
-  "description": "CRUD de Produtos utilizando MongoDB",
+  "description": "CRUD de Usuarios utilizando MongoDB",
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",

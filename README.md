@@ -1,4 +1,4 @@
-# pi4_2020_2_crud_produtos
+# pi4_2020_2_crud_usuarios
 Para executar esse exemplo:
 > npm install
 
