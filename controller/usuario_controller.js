@@ -51,7 +51,7 @@ exports.buscarPorId = (req, res) => {
     });    
 }
 
-exports.procurar = (req, res, next) => {
+exports.buscarUsuario = (req, res, next) => {
     if (req.query && req.query.usuario){
         const paramUsuario = req.query.usuario;
         console.log(paramUsuario);
