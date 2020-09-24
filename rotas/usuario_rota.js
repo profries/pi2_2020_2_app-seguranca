@@ -4,6 +4,7 @@ const controller = require('../controller/usuario_controller')
 
 router.get('/', controller.listar);
 router.post('/', controller.inserir);
+router.post('/auth', controller.validaUsuario);
 //Adicionado search para buscar produto pelo nome
 router.get('/search', controller.buscarUsuario);
 router.get('/:id', controller.buscarPorId);
