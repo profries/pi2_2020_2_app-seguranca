@@ -1,5 +1,6 @@
 const Usuario = require('../model/usuario')
-var jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 
 exports.listar = (req, res) => { 
@@ -13,7 +14,8 @@ exports.listar = (req, res) => {
 
 
 exports.inserir = (req, res) => {
-    let novoUsuario = new Usuario(req.body);        
+    let novoUsuario = new Usuario(req.body);
+    novoUsuario.senha = bcrypt.hashSync(req.body.senha,10);        
     novoUsuario.save((err, usuario) => {
         if(err){
             res.send(err);
@@ -74,7 +76,8 @@ exports.validaUsuario = (req, res, next) => {
             if(err){
                 res.status(500).send(err);
             }
-            if(usuario && usuario.senha == senha){
+            const valido = bcrypt.compareSync(senha, usuario.senha);
+            if(usuario && valido){
                 const token = jwt.sign({
                     id: usuario.id
                 }, 'Sen@cr5', {expiresIn: "1h"});
@@ -87,3 +90,20 @@ exports.validaUsuario = (req, res, next) => {
     }
 }
 
+exports.validaToken = (req, res, next) => {
+    const token = req.get("x-auth-token");
+    if(!token) {
+        res.status(401).send("Nao tem token de acesso");
+    }
+    else {
+        jwt.verify(token,'Sen@cr5',(err,userId) =>{
+            if(err){
+                res.status(401).send(err);
+            }
+            else {
+                console.log("Usuario autorizado: "+userId);
+                next();
+            }
+        })
+    }
+}

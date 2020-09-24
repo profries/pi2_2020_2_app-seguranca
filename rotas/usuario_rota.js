@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controller/usuario_controller')
 
+
 router.get('/', controller.listar);
 router.post('/', controller.inserir);
 router.post('/auth', controller.validaUsuario);
