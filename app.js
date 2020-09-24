@@ -35,10 +35,10 @@ app.use((req,resp,next) => {
   next();
 });
 
-app.use('/api/produtos', controller.validaToken);
+
 
 //Uso das rotas
-app.use('/api/produtos', rotaProduto);
+app.use('/api/produtos', controller.validaToken, rotaProduto);
 
 app.use('/api/usuarios', rotaUsuario);
 
